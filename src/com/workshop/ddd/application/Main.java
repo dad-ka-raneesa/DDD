@@ -3,7 +3,9 @@ package com.workshop.ddd.application;
 import com.workshop.ddd.domain.*;
 import com.workshop.ddd.domain.domain_service.CompetitorBasePricer;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Main {
 
@@ -49,5 +51,17 @@ public class Main {
         System.out.println(cart1.equals(cart2));
 
         System.out.println(cart1.checkout());
+
+        //---------------------------
+        Address address1 = new Address("Vizag");
+        List<BankAccount> bankAccounts = new ArrayList<>();
+        bankAccounts.add(new BankAccount(address1));
+        bankAccounts.add(new BankAccount(address1));
+
+        Customer customer = new Customer(address1, bankAccounts);
+        System.out.println(customer);
+
+        customer.updateAddress(new Address("Chennai"));
+        System.out.println(customer);
     }
 }
