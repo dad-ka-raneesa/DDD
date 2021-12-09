@@ -10,11 +10,13 @@ public class ShoppingCart {
     private final String id;
     private final List<Item> items;
     private final List<DomainEvent> removedProducts;
+    private boolean isCheckedOut;
 
     public ShoppingCart(){
         this.id = UUID.randomUUID().toString();
         this.items = new ArrayList<>();
         this.removedProducts = new ArrayList<>();
+        this.isCheckedOut = false;
     }
 
     public void addProduct(Item item){
@@ -35,6 +37,7 @@ public class ShoppingCart {
         for(Item item: items){
             products.add(item.getProduct());
         }
+        this.isCheckedOut = true;
         return new Order(products);
     }
 
