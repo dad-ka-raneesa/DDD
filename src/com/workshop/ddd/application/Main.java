@@ -47,5 +47,7 @@ public class Main {
         System.out.println(cart1);
         System.out.println(cart2);
         System.out.println(cart1.equals(cart2));
+
+        System.out.println(cart1.checkout());
     }
 }

@@ -8,21 +8,21 @@ import java.util.UUID;
 public class ShoppingCart {
 
     private final String id;
-    private final List<Item> products;
+    private final List<Item> items;
     private final List<DomainEvent> removedProducts;
 
     public ShoppingCart(){
         this.id = UUID.randomUUID().toString();
-        this.products  = new ArrayList<>();
+        this.items = new ArrayList<>();
         this.removedProducts = new ArrayList<>();
     }
 
     public void addProduct(Item item){
-        products.add(item);
+        items.add(item);
     }
 
     public void removeProduct(Item item){
-        products.remove(item);
+        items.remove(item);
         this.removedProducts.add(new DomainEvent(item.getProduct().getName()));
     }
 
@@ -30,10 +30,18 @@ public class ShoppingCart {
         return removedProducts;
     }
 
+    public Order checkout() {
+        List<Product> products = new ArrayList<>();
+        for(Item item: items){
+            products.add(item.getProduct());
+        }
+        return new Order(products);
+    }
+
     @Override
     public String toString() {
         return "ShoppingCart{" +
-                "products=" + products +
+                "products=" + items +
                 '}';
     }
 
