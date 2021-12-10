@@ -3,9 +3,7 @@ package com.workshop.ddd.application;
 import com.workshop.ddd.domain.*;
 import com.workshop.ddd.domain.domain_service.CompetitorBasePricer;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class Main {
 
@@ -40,28 +38,34 @@ public class Main {
 
         final CompetitorBasePricer competitorBasePricer = new CompetitorBasePricer(competitorProducts);
 
-        Product prod1 = new Product("Ipad", new Price(competitorBasePricer.getDiscountedPrice("Ipad")));
-        Product prod2 = new Product("Ipad", new Price(competitorBasePricer.getDiscountedPrice("Ipad")));
+        Product prod1 = new Product("Ipad", new Price(competitorBasePricer.getDiscountedPrice("Ipad")), 200.0);
+        Product prod2 = new Product("Ipad", new Price(competitorBasePricer.getDiscountedPrice("Ipad")), 200.0);
+        Product prod3 = new Product("GM Cricket bat", new Price(competitorBasePricer.getDiscountedPrice("GM Cricket bat")), 500.0);
 
-        cart1.addProduct(new Item(prod1, 1));
+        cart1.addProduct(new Item(prod1, 2));
+        cart1.addProduct(new Item(prod3, 1));
         cart2.addProduct(new Item(prod2, 1));
 
-        System.out.println(cart1);
-        System.out.println(cart2);
-        System.out.println(cart1.equals(cart2));
+        //System.out.println(cart1);
+        //System.out.println(cart2);
+        //System.out.println(cart1.equals(cart2));
 
-        System.out.println(cart1.checkout());
+        Order order = cart1.checkout();
+        System.out.println(order);
+
+        Double totalPrice = order.getTotalCost();
+        System.out.println(totalPrice);
 
         //---------------------------
-        Address address1 = new Address("Vizag");
-        List<BankAccount> bankAccounts = new ArrayList<>();
-        bankAccounts.add(new BankAccount(address1));
-        bankAccounts.add(new BankAccount(address1));
-
-        Customer customer = new Customer(address1, bankAccounts);
-        System.out.println(customer);
-
-        customer.updateAddress(new Address("Chennai"));
-        System.out.println(customer);
+//        Address address1 = new Address("Vizag");
+//        List<BankAccount> bankAccounts = new ArrayList<>();
+//        bankAccounts.add(new BankAccount(address1));
+//        bankAccounts.add(new BankAccount(address1));
+//
+//        Customer customer = new Customer(address1, bankAccounts);
+//        System.out.println(customer);
+//
+//        customer.updateAddress(new Address("Chennai"));
+//        System.out.println(customer);
     }
 }

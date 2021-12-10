@@ -35,7 +35,9 @@ public class ShoppingCart {
     public Order checkout() {
         List<Product> products = new ArrayList<>();
         for(Item item: items){
-            products.add(item.getProduct());
+            for (int i = 0; i < item.getQuantity(); i++) {
+                products.add(new Product(item.getProduct().getName(), item.getProduct().getProductPrice(), item.getProduct().getWeight()));
+            }
         }
         this.isCheckedOut = true;
         return new Order(products);
